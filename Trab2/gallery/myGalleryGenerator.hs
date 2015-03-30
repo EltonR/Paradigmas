@@ -21,11 +21,11 @@ fillHtml htmltemplate content = replace "<!--@content-->" content htmltemplate
 -- Complete esta funcao de forma a aplicar imageDiv a cada um dos itens da galeria
 -- O resultado final deve ser uma unica string (e nao uma lista de strings)
 genContent :: [(String,String)] -> String
-getContent lista  = concatMap (imageDiv) lista-- substitua a string vazia pelo codigo gerador
+genContent lista  = concatMap (imageDiv) lista-- substitua a string vazia pelo codigo gerador
 
 -- função com list comprehension
-getContentC :: [(String, String)] -> String
-genContentC lista = concat [imageDiv i | i<-lista]
+genContent2 :: [(String, String)] -> String
+genContent2 lista = concat [imageDiv i | i<-lista]
 
 main :: IO ()
 main = do
