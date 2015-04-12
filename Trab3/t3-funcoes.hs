@@ -28,11 +28,11 @@ userName string = [toLower x | x <- [head(string)]] ++ [toLower x | x <- lastNam
 encodeName :: String -> String
 encodeName string = 
 	let troca c
-		|c == 'a' = "4"
-		|c == 'e' = "3"
-		|c == 'i' = "1"
-		|c == 'o' = "0"
-		|c == 'u' = "00"
+		|toLower(c) == 'a' = "4"
+		|toLower(c) == 'e' = "3"
+		|toLower(c) == 'i' = "1"
+		|toLower(c) == 'o' = "0"
+		|toLower(c) == 'u' = "00"
 		|otherwise = [c]
 	in concat(map (troca) string)
 	
