@@ -1,6 +1,5 @@
 package animator;
 
-import static animator.ShapeType.Triangulo;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -51,7 +50,7 @@ class ObjectSet {
             Point local = new Point(random.nextInt(dim.height-100), random.nextInt(dim.width-100));
             local.x += 50;
             local.y += 50;
-            Estrela estrela = new Estrela(5, local, path);
+            Estrela estrela = new Estrela(local, path);
             estrelas.add(estrela);
         }
     }
@@ -162,18 +161,21 @@ class ObjectSet {
         }
         for(int i=0; i<estrelas.size(); i++){
             if(estrelas.get(i).getPath().equalsIgnoreCase("Line")){
-                estrelas.get(i).setLocal(movimento.reta(estrelas.get(i).getLocal()));
+                estrelas.get(i).setPos(movimento.reta(estrelas.get(i).getPos()));
             }
             if(estrelas.get(i).getPath().equalsIgnoreCase("Zoom")){
+                estrelas.get(i).setRaio1(movimento.zoom(estrelas.get(i).getRaio1(), estrelas.get(i).isAumentado()));
+                estrelas.get(i).setRaio2(movimento.zoom(estrelas.get(i).getRaio2(), estrelas.get(i).isAumentado()));
+                estrelas.get(i).setAumentado(movimento.isAumentando(estrelas.get(i).getRaio1(), estrelas.get(i).isAumentado()));
                 //estrelas.get(i).setCentro(movimento.zoom(estrelas.get(i).getCentro()));
             }
             if(estrelas.get(i).getPath().equalsIgnoreCase("Circle")){
-                estrelas.get(i).setLocal(movimento.circulo(estrelas.get(i).getLocal(), 100, estrelas.get(i).getVolta()));
+                estrelas.get(i).setPos(movimento.circulo(estrelas.get(i).getPos(), 100, estrelas.get(i).getVolta()));
                 estrelas.get(i).setVolta(estrelas.get(i).getVolta()+0.2);
             }
             if(estrelas.get(i).getPath().equalsIgnoreCase("Borda")){
-                estrelas.get(i).setLocal(movimento.bordas(estrelas.get(i).getLocal(), estrelas.get(i).getVolta()));
-                estrelas.get(i).setVolta(movimento.setVolta(estrelas.get(i).getLocal(), 100, 100, estrelas.get(i).getVolta()));
+                estrelas.get(i).setPos(movimento.bordas(estrelas.get(i).getPos(), estrelas.get(i).getVolta()));
+                estrelas.get(i).setVolta(movimento.setVolta(estrelas.get(i).getPos(), 100, 100, estrelas.get(i).getVolta()));
             }
         }
         for(int i=0; i<triangulos.size(); i++){

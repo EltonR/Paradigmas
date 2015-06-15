@@ -9,7 +9,7 @@ import java.util.Random;
  * @author Dom Quixote
  */
 public class Movimento {
-    private final int maxLadoRaio = 150;
+    private final int maxLadoRaio = 120;
     private final int minLadoRaio = 50;
     private Dimension dim;
     
