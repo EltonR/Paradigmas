@@ -243,7 +243,7 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="Circle"/>
+            <StringItem index="0" value="Espiral"/>
             <StringItem index="1" value="Line"/>
             <StringItem index="2" value="Borda"/>
           </StringArray>
@@ -330,7 +330,7 @@
           <StringArray count="4">
             <StringItem index="0" value="Borda"/>
             <StringItem index="1" value="Zoom"/>
-            <StringItem index="2" value="Circle"/>
+            <StringItem index="2" value="Espiral"/>
             <StringItem index="3" value="Line"/>
           </StringArray>
         </Property>

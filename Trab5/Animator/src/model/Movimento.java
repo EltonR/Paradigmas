@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.util.Random;
 
 /**
  *
@@ -28,6 +27,10 @@ public class Movimento {
         int x = (int) Math.floor(centro.getX() + Math.cos(volta)*raio_circulo/4);
         int y = (int) Math.floor(centro.getY() + Math.sin(volta)*raio_circulo/4);
         Point centro2 = new Point(x, y);
+        if(centro2.x < -170 || centro2.y < -170){
+            centro2.x = dim.width+30;
+            centro2.y = dim.height+30;
+        }
         return centro2;
     }
     
@@ -69,4 +72,6 @@ public class Movimento {
             return 3;
         return volta;
     }
+    
 }
+

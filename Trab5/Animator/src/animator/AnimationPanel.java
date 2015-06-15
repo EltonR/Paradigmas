@@ -3,17 +3,7 @@ package animator;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.net.URL;
-import static javafx.scene.input.DataFormat.URL;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import sun.applet.Main;
-import javafx.scene.media.MediaPlayer;
 
 class AnimationPanel extends JPanel implements Runnable {
 

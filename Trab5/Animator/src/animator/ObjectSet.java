@@ -117,7 +117,7 @@ class ObjectSet {
         for(int i=0; i<images.size(); i++){
             if(images.get(i).getPath().equalsIgnoreCase("Line"))
                 images.get(i).setCentro(movimento.reta(images.get(i).getCentro()));
-            if(images.get(i).getPath().equalsIgnoreCase("Circle")){
+            if(images.get(i).getPath().equalsIgnoreCase("Espiral")){
                 images.get(i).setCentro(movimento.circulo(images.get(i).getCentro(), 100, images.get(i).getVolta()));
                 images.get(i).setVolta(images.get(i).getVolta()+0.2);
             }
@@ -134,7 +134,7 @@ class ObjectSet {
                 circulos.get(i).setRaio(movimento.zoom(circulos.get(i).getRaio(), circulos.get(i).isAumentando()));
                 circulos.get(i).setAumentando(movimento.isAumentando(circulos.get(i).getRaio(), circulos.get(i).isAumentando()));
             }
-            if(circulos.get(i).getPath().equalsIgnoreCase("Circle")){
+            if(circulos.get(i).getPath().equalsIgnoreCase("Espiral")){
                 circulos.get(i).setCentro(movimento.circulo(circulos.get(i).getCentro(), 100, circulos.get(i).getVolta()));
                 circulos.get(i).setVolta(circulos.get(i).getVolta()+0.2);
             }
@@ -150,7 +150,7 @@ class ObjectSet {
                 quadrados.get(i).setLado(movimento.zoom(quadrados.get(i).getLado(), quadrados.get(i).isAumentando()));
                 quadrados.get(i).setAumentando(movimento.isAumentando(quadrados.get(i).getLado(), quadrados.get(i).isAumentando()));
             }
-            if(quadrados.get(i).getPath().equalsIgnoreCase("Circle")){
+            if(quadrados.get(i).getPath().equalsIgnoreCase("Espiral")){
                 quadrados.get(i).setCentro(movimento.circulo(quadrados.get(i).getCentro(), 100, quadrados.get(i).getVolta()));
                 quadrados.get(i).setVolta(quadrados.get(i).getVolta()+0.2);
             }
@@ -169,7 +169,7 @@ class ObjectSet {
                 estrelas.get(i).setAumentado(movimento.isAumentando(estrelas.get(i).getRaio1(), estrelas.get(i).isAumentado()));
                 //estrelas.get(i).setCentro(movimento.zoom(estrelas.get(i).getCentro()));
             }
-            if(estrelas.get(i).getPath().equalsIgnoreCase("Circle")){
+            if(estrelas.get(i).getPath().equalsIgnoreCase("Espiral")){
                 estrelas.get(i).setPos(movimento.circulo(estrelas.get(i).getPos(), 100, estrelas.get(i).getVolta()));
                 estrelas.get(i).setVolta(estrelas.get(i).getVolta()+0.2);
             }
@@ -186,7 +186,7 @@ class ObjectSet {
                 triangulos.get(i).setLado(movimento.zoom(triangulos.get(i).getLado(), triangulos.get(i).isAumentando()));
                 triangulos.get(i).setAumentando(movimento.isAumentando(triangulos.get(i).getLado(), triangulos.get(i).isAumentando()));
             }
-            if(triangulos.get(i).getPath().equalsIgnoreCase("Circle")){
+            if(triangulos.get(i).getPath().equalsIgnoreCase("Espiral")){
                 triangulos.get(i).setCentro(movimento.circulo(triangulos.get(i).getCentro(), 100, triangulos.get(i).getVolta()));
                 triangulos.get(i).setVolta(triangulos.get(i).getVolta()+0.2);
             }
