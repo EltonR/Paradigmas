@@ -7,9 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import model.Classe;
 import model.Grupo;
-import model.Personagem;
+import model.Horario;
 
 public class GrupoDao {
     
@@ -37,6 +36,18 @@ public class GrupoDao {
         }
         return grupos;
     }
+    public Collection loadGrupos(Horario horario){
+        System.out.println("Carregando Grupos por horario...");
+        ArrayList<Grupo> l2 = (ArrayList<Grupo>) loadGrupos();
+        ArrayList<Grupo> l = new ArrayList<>();
+        for(int i=0; i<l2.size(); i++)
+            if(l2.get(i).getHorario().getDia().equalsIgnoreCase(horario.getDia()))
+                if(l2.get(i).getHorario().getHorario().equalsIgnoreCase(horario.getHorario()))
+                    l.add(l2.get(i));
+        System.out.println("Grupos nesse horario: "+l.size());
+        return l;
+    }
+    
     public void saveGrupo(Grupo p){
         System.out.println("Salvando Grupo...");
         Collection grupos = loadGrupos();
@@ -77,13 +88,16 @@ public class GrupoDao {
         }
     }
     
+    
+    
     public int nextId(){
         int n=0;
         ArrayList<Grupo> lista = (ArrayList<Grupo>) loadGrupos();
-        for(int i=0; i<lista.size(); i++){
-            if(lista.get(i).getId() > n)
-                n = lista.get(i).getId();
-        }
+        if(lista!=null)
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getId() > n)
+                    n = lista.get(i).getId();
+            }
         return (n+1);
     }
     

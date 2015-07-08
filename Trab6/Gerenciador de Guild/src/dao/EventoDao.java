@@ -80,10 +80,11 @@ public class EventoDao {
     public int nextId(){
         int n=0;
         ArrayList<Evento> lista = (ArrayList<Evento>) loadEventos();
-        for(int i=0; i<lista.size(); i++){
-            if(lista.get(i).getId() > n)
-                n = lista.get(i).getId();
-        }
+        if(lista!=null)
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getId() > n)
+                    n = lista.get(i).getId();
+            }
         return (n+1);
     }
 }

@@ -228,7 +228,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Personagem Especifico:"/>
+            <Property name="text" type="java.lang.String" value="Personagens Nesse Horario:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox3">

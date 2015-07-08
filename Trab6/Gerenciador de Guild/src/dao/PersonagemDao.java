@@ -38,7 +38,7 @@ public class PersonagemDao {
     }
     public void savePersonagem(Personagem p){
         System.out.println("Salvando Personagem...");
-        Collection personagens = loadPersonagens();
+        Collection personagens = PersonagemDao.this.loadPersonagens();
         if(personagens == null)
             personagens = new ArrayList<>();
         personagens.add(p);
@@ -58,7 +58,7 @@ public class PersonagemDao {
     
     public void deletePersonagem(Personagem p){
         System.out.println("Removendo Personagem...");
-        ArrayList<Personagem> personagens = (ArrayList<Personagem>) loadPersonagens();
+        ArrayList<Personagem> personagens = (ArrayList<Personagem>) PersonagemDao.this.loadPersonagens();
         if(personagens == null)
             personagens = new ArrayList<>();
         for(int i=0; i<personagens.size(); i++)
@@ -82,9 +82,9 @@ public class PersonagemDao {
     }
     
     
-    public Collection getX(int n, String especialidade, Horario horario){
+    public Collection loadPersonagens(int n, String especialidade, Horario horario){
         ArrayList<Personagem> l = new ArrayList<>();
-        ArrayList<Personagem> l2 = (ArrayList<Personagem>) loadPersonagens();
+        ArrayList<Personagem> l2 = (ArrayList<Personagem>) PersonagemDao.this.loadPersonagens();
         for(int i=0; i<l2.size(); i++){
             for(int j=0; j<l2.get(i).getDisponibilidade().size(); j++)
                 if(l2.get(i).getDisponibilidade().get(j).getDia().equalsIgnoreCase(horario.getDia()))
@@ -94,14 +94,26 @@ public class PersonagemDao {
         }
         return l;
     }
+    public Collection loadPersonagens(Horario horario){
+        ArrayList<Personagem> l = new ArrayList<>();
+        ArrayList<Personagem> l2 = (ArrayList<Personagem>) PersonagemDao.this.loadPersonagens();
+        for(int i=0; i<l2.size(); i++){
+            for(int j=0; j<l2.get(i).getDisponibilidade().size(); j++)
+                if(l2.get(i).getDisponibilidade().get(j).getDia().equalsIgnoreCase(horario.getDia()))
+                    if(l2.get(i).getDisponibilidade().get(j).getHorario().equalsIgnoreCase(horario.getHorario()))
+                            l.add(l2.get(i));
+        }
+        return l;
+    }
     
     public int nextId(){
         int n=0;
-        ArrayList<Personagem> lista = (ArrayList<Personagem>) loadPersonagens();
-        for(int i=0; i<lista.size(); i++){
-            if(lista.get(i).getId() > n)
-                n = lista.get(i).getId();
-        }
+        ArrayList<Personagem> lista = (ArrayList<Personagem>) PersonagemDao.this.loadPersonagens();
+        if(lista!=null)
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getId() > n)
+                    n = lista.get(i).getId();
+            }
         return (n+1);
     }
 }

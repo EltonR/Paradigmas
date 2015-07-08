@@ -100,10 +100,11 @@ public class RacaDao {
     public int nextId(){
         int n=0;
         ArrayList<Raca> lista = (ArrayList<Raca>) loadRacas();
-        for(int i=0; i<lista.size(); i++){
-            if(lista.get(i).getId() > n)
-                n = lista.get(i).getId();
-        }
+        if(lista!=null)
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getId() > n)
+                    n = lista.get(i).getId();
+            }
         return (n+1);
     }
     

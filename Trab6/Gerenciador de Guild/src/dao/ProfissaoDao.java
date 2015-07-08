@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import model.Classe;
 import model.Profissao;
 
 public class ProfissaoDao {
@@ -65,6 +64,8 @@ public class ProfissaoDao {
             String[] p6E = {"Moveis", "Tabuas", "Pre-moldados", "Construcao"};
             p6.setEspecialidades(new ArrayList<String>(Arrays.asList(p6E)));
             
+            p1.setId(1);p2.setId(2);p3.setId(3);p4.setId(4);p5.setId(5);p6.setId(6);
+            
             profissoes.add(p1);profissoes.add(p2);profissoes.add(p3);profissoes.add(p4);profissoes.add(p5);profissoes.add(p6);
         } 
         return profissoes;
@@ -112,10 +113,11 @@ public class ProfissaoDao {
     public int nextId(){
         int n=0;
         ArrayList<Profissao> lista = (ArrayList<Profissao>) loadProfissoes();
-        for(int i=0; i<lista.size(); i++){
-            if(lista.get(i).getId() > n)
-                n = lista.get(i).getId();
-        }
+        if(lista!=null)
+            for(int i=0; i<lista.size(); i++){
+                if(lista.get(i).getId() > n)
+                    n = lista.get(i).getId();
+            }
         return (n+1);
     }
     

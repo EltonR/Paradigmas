@@ -25,7 +25,7 @@ public class Listar extends javax.swing.JFrame {
         String[] colunasEvents = {"Evento", "Grupo", "Data"};
         String[] colunasClasses = {"Classe"};
         String[] colunasRacas = {"Raça"};
-        String[] colunasGrupos = {"Grupo", "Total de Personagens"};
+        String[] colunasGrupos = {"Grupo", "Total de Personagens", "Horario"};
         DefaultTableModel dtm = null;
         
         if(titulo.equalsIgnoreCase("Listar Personagens")){
@@ -85,7 +85,7 @@ public class Listar extends javax.swing.JFrame {
             if(GrupoDao.getInstance().loadGrupos() != null){
                 ArrayList<Grupo> c = (ArrayList<Grupo>) GrupoDao.getInstance().loadGrupos();
                 for(int i=0; i<c.size(); i++){
-                    dtm.addRow(new Object[]{c.get(i).getNome(), c.get(i).getPersonagens().size()});
+                    dtm.addRow(new Object[]{c.get(i).getNome(), c.get(i).getPersonagens().size(), c.get(i).getHorario().getDia()+" - "+c.get(i).getHorario().getHorario()});
                 }
             }
         }

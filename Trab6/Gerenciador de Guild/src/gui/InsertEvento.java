@@ -14,10 +14,7 @@ public class InsertEvento extends javax.swing.JFrame {
     
     public InsertEvento() {
         initComponents();
-        grupos = (ArrayList<Grupo>) GrupoDao.getInstance().loadGrupos();
-        for(int i=0; i<grupos.size(); i++){
-            jComboBox3.addItem(grupos.get(i).getNome());
-        }
+        atualizaHorario();
     }
 
     @SuppressWarnings("unchecked")
@@ -42,10 +39,20 @@ public class InsertEvento extends javax.swing.JFrame {
         jLabel2.setText("Dia:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado", "Domingo" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Horario:");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00:00 - 01:00", "01:00 - 02:00", "02:00 - 03:00", "03:00 - 04:00", "04:00 - 05:00", "05:00 - 06:00", "06:00 - 07:00", "07:00 - 08:00", "08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00", "20:00 - 21:00", "21:00 - 22:00", "22:00 - 23:00", "23:00 - 24:00" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Grupo:");
 
@@ -115,6 +122,10 @@ public class InsertEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(jComboBox3.getSelectedIndex() < 0){
+            JOptionPane.showMessageDialog(rootPane, "Eventos Necessitam ter um Grupo!");
+            return;
+        }
         Evento e = new Evento();
         e.setId(EventoDao.getInstance().nextId());
         e.setNome(jTextField1.getText());
@@ -127,6 +138,24 @@ public class InsertEvento extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        atualizaHorario();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        atualizaHorario();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void atualizaHorario(){
+        Horario h = new Horario();
+        h.setDia(jComboBox1.getSelectedItem().toString());
+        h.setHorario(jComboBox2.getSelectedItem().toString());
+        grupos = (ArrayList<Grupo>) GrupoDao.getInstance().loadGrupos(h);
+        jComboBox3.removeAllItems();
+        for(int i=0; i<grupos.size(); i++){
+            jComboBox3.addItem(grupos.get(i).getNome());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

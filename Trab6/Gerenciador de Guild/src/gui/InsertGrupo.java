@@ -28,15 +28,13 @@ public class InsertGrupo extends javax.swing.JFrame {
             }
         }
         Collections.sort(list);
-        personagens_todos = (ArrayList<Personagem>) PersonagemDao.getInstance().loadPersonagens();
+        
         personagens_grupo = new ArrayList<>();
         for(int i=0; i<list.size(); i++){
             jComboBox5.addItem(list.get(i));
         }
-        for(int i=0; i<personagens_todos.size(); i++){
-            jComboBox3.addItem(personagens_todos.get(i).getNomePersonagem()+ " - "+personagens_todos.get(i).getEspecialidade());
-        }
-        atualizaTabela();
+        
+        atualizaPersonagens();
     }
 
     
@@ -116,7 +114,7 @@ public class InsertGrupo extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Personagem Especifico:");
+        jLabel3.setText("Personagens Nesse Horario:");
 
         jButton4.setText("Inserir");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +255,7 @@ public class InsertGrupo extends javax.swing.JFrame {
         Horario horario = new Horario();
         horario.setDia(jComboBox1.getSelectedItem().toString());
         horario.setHorario(jComboBox2.getSelectedItem().toString());
-        ArrayList<Personagem> lista = (ArrayList<Personagem>) PersonagemDao.getInstance().getX(n, s, horario);
+        ArrayList<Personagem> lista = (ArrayList<Personagem>) PersonagemDao.getInstance().loadPersonagens(n, s, horario);
         if(lista.size() < n){
             JOptionPane.showMessageDialog(rootPane, "Existem apenas "+lista.size()+ " personagens \ncom este horario e esta especialidade!");
             return;
@@ -273,6 +271,10 @@ public class InsertGrupo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Grupos devem possuir 5, 10 ou 25 integrantes");
             return;
         }
+        if(jTextField1.getText().replace(" ", "").equals("") || jTextField1.getText() == null){
+            JOptionPane.showMessageDialog(rootPane, "Grupos Necessitam ter nome!");
+            return;
+        }
         Grupo g = new Grupo();
         g.setId(GrupoDao.getInstance().nextId());
         g.setPersonagens(personagens_grupo);
@@ -282,6 +284,7 @@ public class InsertGrupo extends javax.swing.JFrame {
         horario.setHorario(jComboBox2.getSelectedItem().toString());
         g.setHorario(horario);
         GrupoDao.getInstance().saveGrupo(g);
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -293,6 +296,14 @@ public class InsertGrupo extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void atualizaPersonagens(){
+        Horario h = new Horario();
+        h.setDia(jComboBox1.getSelectedItem().toString());
+        h.setHorario(jComboBox2.getSelectedItem().toString());
+        personagens_todos = (ArrayList<Personagem>) PersonagemDao.getInstance().loadPersonagens(h);
+        jComboBox3.removeAllItems();
+        for(int i=0; i<personagens_todos.size(); i++){
+            jComboBox3.addItem(personagens_todos.get(i).getNomePersonagem()+ " - "+personagens_todos.get(i).getEspecialidade());
+        }
         personagens_grupo.clear();    
         atualizaTabela();
     }
